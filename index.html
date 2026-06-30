@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-hero® Platinum – Essential Elements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #161A30;
+    --header-navy: #182D4A;
+    --press-bg: #10121F;
+    --cards-bg: #EEFAFF;
+    --accent: #00B1FF;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: var(--navy);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { text-decoration: none; }
+
+  ul { margin: 0; padding: 0; }
+
+  .page-section { width: 100%; }
+
+  /* ---------- Buttons ---------- */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #fff;
+    border: 3px solid var(--accent);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+  }
+  .btn-pill:hover { background: #fff; color: var(--accent); }
+
+  .btn-pill--small {
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    font-size: 13px;
+    padding: 9px 22px;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  .site-header {
+    background: var(--header-navy);
+    width: 100%;
+    position: relative;
+    z-index: 50;
+  }
+  .site-header__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+  }
+  .site-header__logo img { height: 42px; width: auto; }
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .site-header__nav a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .site-header__nav a:hover { opacity: 0.8; }
+
+  @media (max-width: 767px) {
+    .site-header__inner { padding: 12px 20px; }
+    .site-header__logo img { height: 36px; }
+    .site-header__nav { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background-image: url('Images/ee-t-hero-platinum-landing-page-hero-desktop.webp');
+    background-size: cover;
+    background-position: center top;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+  .hero__content {
+    max-width: 540px;
+    padding: 50px 0 50px 6%;
+  }
+  .hero__content h1 {
+    color: #fff;
+    font-size: 54px;
+    font-weight: 900;
+    line-height: 60px;
+    margin: 0 0 18px;
+  }
+  .hero__content h2 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0 0 16px;
+  }
+  .hero__bullets {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+  }
+  .hero__bullets li {
+    color: #fff;
+    font-size: 16px;
+    line-height: 28px;
+    position: relative;
+    padding-left: 18px;
+  }
+  .hero__bullets li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #fff;
+  }
+  .hero__stars {
+    color: var(--accent);
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .hero__quote {
+    color: #fff;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 22px;
+    margin: 0 0 10px;
+  }
+  .hero__buyer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 26px;
+  }
+  .hero__buyer svg { flex-shrink: 0; }
+
+  @media (max-width: 767px) {
+    .hero {
+      background-image: url('Images/ee-t-hero-platinum-landing-page-hero-mobile-688939f380234.webp');
+      min-height: 780px;
+      align-items: flex-start;
+    }
+    .hero__content {
+      max-width: 100%;
+      padding: 34px 24px 0;
+    }
+    .hero__content h1 { font-size: 32px; line-height: 36px; }
+    .hero__content h2 { font-size: 17px; line-height: 22px; }
+    .hero__bullets li { font-size: 14px; line-height: 24px; }
+    .hero__quote { font-size: 13px; }
+    .hero__buyer { font-size: 12px; margin-bottom: 230px; }
+  }
+
+  /* ---------- Press bar ---------- */
+  .press-bar {
+    background: var(--press-bg);
+    overflow: hidden;
+    padding: 32px 0;
+  }
+  .press-bar__track {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    width: max-content;
+    animation: marquee 22s linear infinite;
+  }
+  .press-bar:hover .press-bar__track { animation-play-state: paused; }
+  .press-bar__track img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (max-width: 767px) {
+    .press-bar { padding: 22px 0; }
+    .press-bar__track { gap: 44px; }
+    .press-bar__track img { height: 20px; }
+  }
+
+  /* ---------- Benefit cards ---------- */
+  .benefits {
+    background: var(--cards-bg);
+    padding: 56px 24px;
+  }
+  .benefits__grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .benefit-card {
+    perspective: 1200px;
+    cursor: pointer;
+    height: 320px;
+  }
+  .benefit-card .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform .55s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .benefit-card.flipped .card-inner { transform: rotateY(180deg); }
+  @media (hover: hover) {
+    .benefit-card:hover .card-inner { transform: rotateY(180deg); }
+  }
+  .benefit-card .card-front,
+  .benefit-card .card-back {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: -2px 2px 10px rgba(0, 187, 231, 0.10);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    padding: 32px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .benefit-card .card-front { align-items: center; }
+  .benefit-card .card-back {
+    transform: rotateY(180deg);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .benefit-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 18px;
+    color: var(--navy);
+    text-align: center;
+  }
+  .benefit-card .card-back h3 { margin-bottom: 14px; }
+  .benefit-card .card-back p {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0;
+    color: var(--navy);
+  }
+
+  /* Mini line-chart on card front (pre-built SVG asset from Figma) */
+  .benefit-card__chart {
+    width: 100%;
+    flex: 1;
+    display: block;
+    object-fit: contain;
+  }
+  @media (max-width: 767px) {
+    .benefits { padding: 32px 16px; }
+    .benefits__grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .benefit-card { height: 300px; }
+    .benefit-card .card-front,
+    .benefit-card .card-back { padding: 24px 16px; }
+  }
+
+  /* ---------- Real reason section ---------- */
+  .real-reason {
+    background: #FBFDFF;
+    padding: 80px 24px;
+  }
+  .real-reason__grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .real-reason__image img {
+    border-radius: 4px;
+    width: 100%;
+  }
+  .real-reason__text h2 {
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 48px;
+    margin: 0 0 24px;
+    color: var(--navy);
+  }
+  .real-reason__text p {
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0 0 18px;
+    color: var(--navy);
+  }
+  @media (max-width: 767px) {
+    .real-reason { padding: 40px 20px; }
+    .real-reason__grid { grid-template-columns: 1fr; gap: 28px; }
+    .real-reason__text h2 { font-size: 32px; line-height: 36px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__logo">
+        <img src="Images/EE_logo_horizontal_white.avif" alt="Essential Elements">
+      </a>
+      <ul class="site-header__nav">
+        <li><a href="#">The Essentials</a></li>
+        <li><a href="#">Compare</a></li>
+        <li><a href="#">Reviews</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <a href="#" class="btn-pill btn-pill--small">Save Now</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1>It's Time To Upgrade Your T-Support</h1>
+      <h2>Improve your testosterone by 33% in 60 days&dagger;</h2>
+      <ul class="hero__bullets">
+        <li>Male drive + mental edge</li>
+        <li>Strength + muscle mass</li>
+        <li>Energy + endurance</li>
+      </ul>
+      <div class="hero__stars">★★★★★</div>
+      <p class="hero__quote">"I can completely feel the difference, mentally and physically."</p>
+      <div class="hero__buyer">
+        <span>Devin, verified buyer (T-hero® Platinum)</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#00B1FF"/>
+          <path d="M7 12.5L10.2 15.5L17 8.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <a href="#" class="btn-pill">Shop Now &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Press mentions bar -->
+  <section class="press-bar">
+    <div class="press-bar__track">
+      <img src="Images/thestreet-vector-logo_1_1_2ced1ddc-a813-4c75-97f5-e927511da154.webp" alt="The Street">
+      <img src="Images/BuzzFeed_1_1.webp" alt="BuzzFeed">
+      <img src="Images/Business_Insider_Logo_1.webp" alt="Business Insider">
+      <img src="Images/YahooLife_1.webp" alt="Yahoo Life">
+      <img src="Images/Whole_Foods_Mag_1.webp" alt="Whole Foods Magazine">
+      <img src="Images/Forbes2.webp" alt="Forbes">
+      <img src="Images/thestreet-vector-logo_1_1_2ced1ddc-a813-4c75-97f5-e927511da154.webp" alt="The Street">
+      <img src="Images/BuzzFeed_1_1.webp" alt="BuzzFeed">
+      <img src="Images/Business_Insider_Logo_1.webp" alt="Business Insider">
+      <img src="Images/YahooLife_1.webp" alt="Yahoo Life">
+      <img src="Images/Whole_Foods_Mag_1.webp" alt="Whole Foods Magazine">
+      <img src="Images/Forbes2.webp" alt="Forbes">
+    </div>
+  </section>
+
+  <!-- Four benefit cards -->
+  <section class="benefits">
+    <div class="benefits__grid">
+      <div class="benefit-card" data-card="energy-performance" role="button" tabindex="0" aria-label="Energy &amp; Performance, tap or hover to learn more">
+        <div class="card-inner">
+          <div class="card-front">
+            <h3>Energy &amp; Performance</h3>
+            <img class="benefit-card__chart" src="Images/energy-performance.svg" alt="Chart showing a 33% increase in Free Testosterone over 60 days">
+          </div>
+          <div class="card-back" aria-hidden="true">
+            <h3>Energy &amp; Performance</h3>
+            <p>T-hero&reg; Platinum works to keep you moving whether you&rsquo;re working hard or playing hard by increasing testosterone levels by 33% in just 60 days.</p>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-card" data-card="sleep-quality" role="button" tabindex="0" aria-label="Sleep Quality, tap or hover to learn more">
+        <div class="card-inner">
+          <div class="card-front">
+            <h3>Sleep Quality</h3>
+            <img class="benefit-card__chart" src="Images/sleep-quality.svg" alt="Chart showing a 42% increase in Restorative Sleep over 45 days">
+          </div>
+          <div class="card-back" aria-hidden="true">
+            <h3>Sleep Quality</h3>
+            <p>The majority of your testosterone is released during slow-wave, REM sleep. Poor sleep leads to low T, which in turn leads to poor sleep, trapping you in a vicious feedback loop.</p>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-card" data-card="reduced-stress" role="button" tabindex="0" aria-label="Reduced Stress, tap or hover to learn more">
+        <div class="card-inner">
+          <div class="card-front">
+            <h3>Reduced Stress</h3>
+            <img class="benefit-card__chart" src="Images/reduced-stress.svg" alt="Chart showing a 67% decrease in Serum Cortisol over 60 days">
+          </div>
+          <div class="card-back" aria-hidden="true">
+            <h3>Reduced Stress</h3>
+            <p>Chronic stress (high cortisol) kneecaps testosterone production. Shoden&reg; Ashwagandha helps regulate stress so testosterone can do its thing.</p>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-card" data-card="sexual-confidence" role="button" tabindex="0" aria-label="Sexual Confidence, tap or hover to learn more">
+        <div class="card-inner">
+          <div class="card-front">
+            <h3>Sexual Confidence</h3>
+            <img class="benefit-card__chart" src="Images/sexual-confidence.svg" alt="Chart showing an 18% increase in DHEA-S over 16 weeks">
+          </div>
+          <div class="card-back" aria-hidden="true">
+            <h3>Sexual Confidence</h3>
+            <p>T-hero&reg; Platinum helps fuel healthy hormone levels to keep you firing on all cylinders from the boardroom to the bedroom.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real reason section -->
+  <section class="real-reason">
+    <div class="real-reason__grid">
+      <div class="real-reason__image">
+        <img src="Images/Ee-T-hero-THP-Rock-Stack-v3.webp" alt="T-hero and T-hero Platinum bottles on rocks">
+      </div>
+      <div class="real-reason__text">
+        <h2>The Real Reason You're Losing Your Edge</h2>
+        <p>We all know the signs: running out of energy at 2 PM, hitting the gym but still seeing your belly grow, the quiet anxiety of a shrinking libido.</p>
+        <p>Low T diminishes nearly every aspect of your manhood. While it's easy to blame your age, your genes, and even diet and lifestyle, one culprit looms head and shoulders above the rest: <strong>stress</strong>.</p>
+        <p>Stress floods your body with cortisol, hijacking the raw materials needed to make testosterone. The more stressed you are, the longer cortisol stays in your system wreaking havoc on your hormones.</p>
+        <p>T-hero® Platinum is your strategic countermeasure. It targets stress at the source using Shoden® Ashwagandha — clinically shown to curb stress and <strong>improve testosterone by 33% in just 60 days.&dagger;</strong></p>
+        <p>Combined with shilajit, DIM, and boron, T-hero® Platinum delivers the firepower you need to maintain your drive and stay in the game on your terms.</p>
+        <p>Stop letting stress call the shots. Reclaim your edge with T-hero® Platinum.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Benefit cards: hover flips on desktop (CSS), tap/click/keyboard flips here for touch + a11y.
+    document.querySelectorAll('.benefit-card').forEach(function (card) {
+      var toggle = function () { card.classList.toggle('flipped'); };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
