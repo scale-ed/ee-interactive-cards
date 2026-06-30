@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiverMD – Benefits Module (Flip)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Tokens (sourced from 1MD Design System 2025) ──────────────── */
+    :root {
+      /* Primitives */
+      --royal-blue-50:  #32457A;
+      --slate-gray-50:  #8B97B1;
+      --slate-gray-20:  #E0E6F0;
+      --slate-gray-10:  #EBF3FB;
+      --white-50:       #F9FDFE;
+      --rich-blue-50:   #303B58;
+      --coral-50:       #FF6D65;
+      --cyan-50:        #0A99D6;
+      --green-50:       #2ED397;
+      --green-60:       #29C98F;
+      --lite-blue-50:   #DEE8EB;
+      --powder-blue-50: #CCE3EA;
+
+      /* Semantic */
+      --bg:          var(--white-50);
+      --bg-secondary: var(--slate-gray-10);
+      --card-bg:     #FFFFFF;
+      --text-main:   var(--royal-blue-50);
+      --text-muted:  var(--slate-gray-50);
+      --accent:      var(--green-50);
+      --accent-dark: var(--green-60);
+      --highlight:   var(--cyan-50);
+      --border:      #CCD5EC;
+      --border-light: var(--slate-gray-20);
+
+      --card-radius: 16px;
+      --gap:         24px;
+    }
+
+    /* ─── Section wrapper ────────────────────────────────────────────── */
+    .benefits-section {
+      background-color: var(--bg);
+      padding: 80px 24px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .benefits-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* ─── Section header ─────────────────────────────────────────────── */
+    .benefits-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .benefits-title-rule {
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: var(--coral-50);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+
+    .benefits-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 50px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ─── Desktop grid ───────────────────────────────────────────────── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    /* ─── Flip card wrapper ──────────────────────────────────────────── */
+    .benefit-card {
+      perspective: 1000px;
+      cursor: pointer;
+      /* Fixed height so front/back are same size */
+      height: 380px;
+    }
+
+    /* Touch/mobile: tap to flip */
+    .benefit-card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* Hover flip on desktop */
+    @media (hover: hover) {
+      .benefit-card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    /* ─── Front & back shared ────────────────────────────────────────── */
+    .card-front,
+    .card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    /* ─── Front face ─────────────────────────────────────────────────── */
+    .card-front {
+      background: var(--card-bg);
+      box-shadow: 0 2px 12px rgba(50, 69, 122, 0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 220px;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-front-body {
+      padding: 20px 24px 24px;
+      flex-shrink: 0;
+    }
+
+    .card-headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 28px;
+      margin-bottom: 4px;
+    }
+
+    .card-benefit-tag {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cyan-50);
+    }
+
+    .card-subheading {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cyan-50);
+      line-height: 21px;
+      margin-top: 6px;
+    }
+
+    /* Flip hint */
+    .card-flip-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--slate-gray-50);
+      opacity: 0.8;
+    }
+
+    .card-flip-hint svg {
+      flex-shrink: 0;
+    }
+
+    /* ─── Back face ──────────────────────────────────────────────────── */
+    .card-back {
+      background: var(--royal-blue-50);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px 28px;
+      box-shadow: 0 2px 12px rgba(50, 69, 122, 0.15);
+    }
+
+    .card-back-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 26px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .card-back p {
+      font-size: 14px;
+      line-height: 22px;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ─── Mobile: horizontal scroll ─────────────────────────────────── */
+    @media (max-width: 767px) {
+      .benefits-section {
+        padding: 60px 0;
+      }
+
+      .benefits-header {
+        padding: 0 24px;
+      }
+
+      .benefits-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding: 0 24px 24px;
+        scrollbar-width: none;
+      }
+
+      .benefits-grid::-webkit-scrollbar { display: none; }
+
+      .benefit-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+        height: 400px;
+      }
+
+      .benefits-grid-wrapper {
+        position: relative;
+      }
+
+      .benefits-grid-wrapper::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 24px;
+        width: 48px;
+        background: linear-gradient(to left, var(--bg), transparent);
+        pointer-events: none;
+      }
+    }
+
+    /* ─── Scroll dots (mobile) ───────────────────────────────────────── */
+    .scroll-dots {
+      display: none;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+    }
+
+    .scroll-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(50, 69, 122, 0.2);
+      transition: background 0.2s;
+    }
+
+    .scroll-dot.active {
+      background: var(--accent);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 767px) {
+      .scroll-dots { display: flex; }
+    }
+  </style>
+</head>
+<body style="background:#F9FDFE;">
+
+<section class="benefits-section">
+  <div class="benefits-inner">
+
+    <!-- Header -->
+    <div class="benefits-header">
+      <span class="benefits-title-rule"></span>
+      <h2 class="benefits-title">The Benefits of a Supported Liver</h2>
+    </div>
+
+    <!-- Grid -->
+    <div class="benefits-grid-wrapper">
+      <div class="benefits-grid" id="benefitsGrid">
+
+        <!-- Card 1 – Energy -->
+        <div class="benefit-card" role="button" aria-label="Healthy Enzyme Activity – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_255843870.jpeg"
+                alt="Woman resting after a run outdoors, representing consistent energy"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">Healthy Enzyme Activity</h3>
+                <span class="card-subheading">More consistent energy throughout the day.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">More consistent energy throughout the day.</span>
+              <p>LiverMD® helps the liver break down and convert nutrients into long-lasting energy. NAC and Alpha Lipoic Acid are clinically studied to support hepatic energy metabolism and healthy enzyme function.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 – Metabolism -->
+        <div class="benefit-card" role="button" aria-label="Liver-Driven Metabolism – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_343446369.jpeg"
+                alt="Grandfather playing basketball with grandchild, representing active metabolism"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">Liver-Driven Metabolism</h3>
+                <span class="card-subheading">Nutrients burned for fuel, not stored as fat.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">Nutrients burned for fuel, not stored as fat.</span>
+              <p>Your liver is the body's primary metabolic hub — when it's sluggish, nutrients get stored instead of burned. LiverMD® supports healthy hepatic function so your body can efficiently convert what you eat into usable energy, encouraging healthier body composition over time.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 – Digestion -->
+        <div class="benefit-card" role="button" aria-label="Bile Production & Fat Metabolism – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_180236452.jpeg"
+                alt="Woman doing pushups in gym, representing digestive wellness"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">Bile Production & Fat Metabolism</h3>
+                <span class="card-subheading">Less bloating after meals you love.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">Less bloating after meals you love.</span>
+              <p>When your liver is properly supported, digestion runs smoother and discomfort after eating becomes less frequent. Siliphos® Milk Thistle is formulated for superior bioavailability to support healthy bile production and liver cell integrity.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 – Detox -->
+        <div class="benefit-card" role="button" aria-label="Cellular Detox Support – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_226268063.jpeg"
+                alt="Man enjoying a round of golf, representing everyday vitality"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">Cellular Detox Support</h3>
+                <span class="card-subheading">Clearer skin, less afternoon fatigue.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">Clearer skin, less afternoon fatigue.</span>
+              <p>LiverMD® nourishes the liver with must-have nutrients that defend against everyday toxins. NAC supports glutathione synthesis — the body's master antioxidant, clinically recognized for its role in liver detoxification and cellular protection.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 – Brain -->
+        <div class="benefit-card" role="button" aria-label="The Liver-Brain Connection – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_346719488.jpeg"
+                alt="Woman playing tennis with focus and energy, representing mental clarity"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">The Liver-Brain Connection</h3>
+                <span class="card-subheading">Mental clarity, sharper focus, steadier mood.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">Mental clarity, sharper focus, steadier mood.</span>
+              <p>When the liver is overwhelmed, metabolic byproducts accumulate — dulling focus and flattening your mood. LiverMD® supports your liver's natural filtration role, while NAC helps replenish glutathione, the antioxidant your brain depends on for sustained clarity and neurochemical balance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 – Antioxidant -->
+        <div class="benefit-card" role="button" aria-label="Antioxidant Defense – click to learn more" tabindex="0">
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                class="card-image"
+                src="images/AdobeStock_365324029.jpeg"
+                alt="Man stretching in gym, representing antioxidant defense and clean living"
+                loading="lazy"
+              />
+              <div class="card-front-body">
+                <h3 class="card-headline">Antioxidant Defense</h3>
+                <span class="card-subheading">Feeling like you're running clean.</span>
+                <div class="card-flip-hint">
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 10.5C4.85998 10.5 3.98996 10.2361 3.24993 9.74161C2.50991 9.24715 1.93314 8.54434 1.59254 7.72208C1.25195 6.89981 1.16283 5.99501 1.33647 5.12209C1.5101 4.24918 1.93868 3.44736 2.56802 2.81802C3.19736 2.18868 3.99918 1.7601 4.87209 1.58647C5.74501 1.41283 6.64981 1.50195 7.47208 1.84254C8.29434 2.18314 8.99715 2.75991 9.49161 3.49993C9.98608 4.23996 10.25 5.10998 10.25 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round"/><path d="M8.75 6L10.25 7.5L11.75 6" stroke="#8B97B1" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hover to learn more
+                </div>
+              </div>
+            </div>
+            <div class="card-back" aria-hidden="true">
+              <span class="card-back-tag">Feeling like you're running clean.</span>
+              <p>A well-supported liver helps replenish your neurochemical balance for a clearer head and a more radiant mood. TocoGaia™ Palm Fruit Extract delivers d-Mixed Tocotrienols, a clinically studied form of Vitamin E shown to provide broad-spectrum antioxidant protection for liver and metabolic health.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.benefits-grid -->
+
+      <!-- Scroll dots (mobile) -->
+      <div class="scroll-dots" id="scrollDots">
+        <div class="scroll-dot active"></div>
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+      </div>
+    </div><!-- /.benefits-grid-wrapper -->
+
+  </div><!-- /.benefits-inner -->
+</section>
+
+<script>
+  // ── Touch detection: swap hint text ──────────────────────────────────
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+    document.querySelectorAll('.card-flip-hint').forEach(hint => {
+      hint.lastChild.textContent = 'Tap to learn more';
+    });
+  }
+
+  // ── Click / keyboard flip ─────────────────────────────────────────────
+  document.querySelectorAll('.benefit-card').forEach(card => {
+    const toggle = () => card.classList.toggle('flipped');
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  // ── Mobile scroll dots ────────────────────────────────────────────────
+  const grid = document.getElementById('benefitsGrid');
+  const dots = document.querySelectorAll('.scroll-dot');
+
+  if (grid && dots.length) {
+    grid.addEventListener('scroll', () => {
+      const cards      = grid.querySelectorAll('.benefit-card');
+      const scrollLeft = grid.scrollLeft;
+      const cardWidth  = cards[0] ? cards[0].offsetWidth + 16 : 1;
+      const active     = Math.round(scrollLeft / cardWidth);
+      dots.forEach((d, i) => d.classList.toggle('active', i === active));
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>
